@@ -6,6 +6,7 @@ import cv2
 import tensorflow as tf
 import csv
 import threading
+import urllib.request
 import uuid
 
 from flask import Flask, jsonify, render_template, request, send_file
@@ -18,7 +19,11 @@ from werkzeug.utils import secure_filename
 # ============================================================
 # FLASK APP
 # ============================================================
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder=os.path.join("frontend", "dist"),
+    static_url_path=""
+)
 CORS(app)
 
 UPLOAD_FOLDER = "uploads"
@@ -41,7 +46,8 @@ tf.config.set_visible_devices([], 'GPU')
 IMG_HEIGHT = 384
 IMG_WIDTH  = 384
 
-MODEL_PATH = "crack_segmentation_final.h5"
+MODEL_PATH = os.environ.get("MODEL_PATH", "crack_segmentation_final.h5")
+MODEL_URL = os.environ.get("MODEL_URL")
 
 # Camera calibration
 DISTANCE_MM = 80
@@ -76,6 +82,15 @@ MORPH_KERNEL = cv2.getStructuringElement(
 # LOAD MODEL
 # ============================================================
 print("Loading model...")
+
+if not os.path.exists(MODEL_PATH) and MODEL_URL:
+    print("Downloading model...")
+    urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+
+if not os.path.exists(MODEL_PATH):
+    raise FileNotFoundError(
+        f"Model file not found at {MODEL_PATH}. Set MODEL_PATH or MODEL_URL."
+    )
 
 model = load_model(MODEL_PATH, compile=False)
 
@@ -389,7 +404,17 @@ def process_video_job(job_id):
 
 @app.route('/')
 def home():
+    react_index = os.path.join(app.static_folder, "index.html")
+
+    if os.path.exists(react_index):
+        return send_file(react_index)
+
     return render_template('index.html')
+
+
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({"status": "ok"})
 
 
 @app.route('/upload', methods=['POST'])

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 function App() {
     const [video, setVideo] = useState(null);
     const [videoURL, setVideoURL] = useState('');
@@ -50,7 +52,7 @@ function App() {
             setProgressText('Queued for processing');
 
             const uploadResponse = await axios.post(
-                'http://127.0.0.1:5000/upload',
+                `${API_BASE}/upload`,
                 formData,
                 {
                     headers: {
@@ -71,7 +73,7 @@ function App() {
                 await wait(700);
 
                 const progressResponse = await axios.get(
-                    `http://127.0.0.1:5000/progress/${jobId}`
+                    `${API_BASE}/progress/${jobId}`
                 );
 
                 const job = progressResponse.data;
@@ -97,7 +99,7 @@ function App() {
             }
 
             const response = await axios.get(
-                `http://127.0.0.1:5000/result/${jobId}`,
+                `${API_BASE}/result/${jobId}`,
                 { responseType: 'blob' }
             );
 
@@ -139,7 +141,7 @@ function App() {
 
                     <div className="serverBadge">
                         <span></span>
-                        Flask API: 127.0.0.1:5000
+                        Flask API: {API_BASE || 'same origin'}
                     </div>
                 </header>
 

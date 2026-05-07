@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: u-net-crack-detection
+    env: docker
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: MODEL_URL
+        sync: false
