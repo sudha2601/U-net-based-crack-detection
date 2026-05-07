@@ -10,6 +10,7 @@ FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV MODEL_URL=https://huggingface.co/Sudhanshu2601/Cracksegementationdataset/resolve/main/crack_segmentation_final%20(2).h5
 
 WORKDIR /app
 

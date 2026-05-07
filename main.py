@@ -46,8 +46,13 @@ tf.config.set_visible_devices([], 'GPU')
 IMG_HEIGHT = 384
 IMG_WIDTH  = 384
 
+DEFAULT_MODEL_URL = (
+    "https://huggingface.co/Sudhanshu2601/Cracksegementationdataset/"
+    "resolve/main/crack_segmentation_final%20(2).h5"
+)
+
 MODEL_PATH = os.environ.get("MODEL_PATH", "crack_segmentation_final.h5")
-MODEL_URL = os.environ.get("MODEL_URL")
+MODEL_URL = os.environ.get("MODEL_URL", DEFAULT_MODEL_URL)
 
 # Camera calibration
 DISTANCE_MM = 80
