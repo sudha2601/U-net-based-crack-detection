@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Flask/runtime output
+uploads/
+outputs/
+instance/
+
+# Model weights and large generated artifacts
+*.h5
+*.keras
+*.pt
+*.pth
+*.onnx
+*.mp4
+*.mov
+*.avi
+*.webm
+*.csv
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Logs and local config
+*.log
+.env
+.env.*
+
+# Editor/system files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

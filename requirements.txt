@@ -1,0 +1,7 @@
+flask
+opencv-python
+tensorflow
+numpy
+scikit-image
+h5py
+werkzeug
