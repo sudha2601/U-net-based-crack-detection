@@ -17,6 +17,12 @@ The trained model file is intentionally not tracked in Git because it is large. 
 crack_segmentation_final.h5
 ```
 
+For deployment, the app can download the model from Hugging Face with `MODEL_URL`:
+
+```text
+https://huggingface.co/Sudhanshu2601/Cracksegementationdataset/resolve/main/crack_segmentation_final%20(2).h5
+```
+
 ## Backend Setup
 
 ```bash
