@@ -1,3 +1,9 @@
+---
+title: U-Net Crack Detection
+sdk: docker
+app_port: 7860
+---
+
 # Crack Detection UI
 
 A Flask + React application for detecting cracks in uploaded video footage with a TensorFlow segmentation model. The backend processes each frame, overlays detected cracks with severity colors, and returns a browser-playable WebM output. The React UI shows upload state, model progress, input preview, detected output preview, and download controls.
@@ -53,3 +59,14 @@ http://127.0.0.1:5173
 ## Notes
 
 Generated uploads, processed videos, CSV reports, frontend build files, dependencies, and model weights are excluded from Git.
+
+## Free Deployment on Hugging Face Spaces
+
+1. Create a new Space at https://huggingface.co/new-space.
+2. Choose **Docker** as the Space SDK.
+3. Choose **Public** visibility.
+4. Use the free **CPU Basic** hardware.
+5. Push this repository's files to the Space repository.
+6. The app will use `MODEL_URL` to download the model during startup.
+
+The first build/start can take several minutes because the container installs TensorFlow and downloads the model file.
