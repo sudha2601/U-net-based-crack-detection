@@ -8,6 +8,10 @@ app_port: 7860
 
 A Flask + React application for detecting cracks in uploaded video footage with a TensorFlow segmentation model. The backend processes each frame, overlays detected cracks with severity colors, and returns a browser-playable WebM output. The React UI shows upload state, model progress, input preview, detected output preview, and download controls.
 
+## Live Demo
+
+[Open the deployed app on Hugging Face Spaces](https://huggingface.co/spaces/Sudhanshu2601/u-net-crack-detection)
+
 ## Project Structure
 
 - `main.py` - Flask API, model loading, video processing, progress endpoints
